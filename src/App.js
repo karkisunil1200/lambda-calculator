@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Operators from './components/ButtonComponents/OperatorButtons/Operators';
 
@@ -10,7 +10,6 @@ import {Display} from './components/DisplayComponents/Display';
 
 // Logo has already been provided for you. Do the same for the remaining components
 import Logo from './components/DisplayComponents/Logo';
-import {fromEventPattern} from 'rxjs';
 
 function App() {
   // STEP 5 - After you get the components displaying using the provided data file, write your state hooks here.
@@ -19,13 +18,22 @@ function App() {
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
+  const [firstNum, setFirstNum] = useState(0);
+  const [operation, setOperation] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
+  const [totalResult, setTotalResult] = useState(0);
+
+  const addInput = num => {
+    setFirstNum(num);
+  };
+
   return (
     <div className='container'>
       <Logo />
       <div className='App'>
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
-        <Display />
-        <Numbers />
+        <Display NumberOne={firstNum} />
+        <Numbers addInput={addInput} />
         <Operators />
         <Specials />
       </div>
